@@ -19,11 +19,18 @@ export async function GET(request: NextRequest) {
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
     );
 
+    const data = await response.json();
+
     if (!response.ok) {
-      return NextResponse.json({ error: 'City not found' }, { status: 404 });
+      if (response.status === 401) {
+        return NextResponse.json({ error: 'Invalid API key. Please check your OpenWeatherMap API key.' }, { status: 401 });
+      } else if (response.status === 404) {
+        return NextResponse.json({ error: 'City not found' }, { status: 404 });
+      } else {
+        return NextResponse.json({ error: data.message || 'Failed to fetch weather data' }, { status: response.status });
+      }
     }
 
-    const data = await response.json();
     return NextResponse.json(data);
   } catch {
     return NextResponse.json({ error: 'Failed to fetch weather data' }, { status: 500 });

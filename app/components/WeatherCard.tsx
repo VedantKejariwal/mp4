@@ -21,34 +21,37 @@ interface WeatherCardProps {
 
 export default function WeatherCard({ weather }: WeatherCardProps) {
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6 max-w-md mx-auto">
-      <h2 className="text-2xl font-bold text-center mb-4">{weather.name}</h2>
+    <div className="bg-gray-800 border border-gray-700 rounded-lg p-8 max-w-md mx-auto">
+      <h2 className="text-4xl font-bold text-gray-200 mb-4">{weather.name}</h2>
       
       <div className="text-center mb-6">
-        <div className="text-4xl font-bold text-blue-600">
+        <div className="text-7xl font-extrabold text-gray-200 mt-4">
           {Math.round(weather.main.temp)}°C
         </div>
-        <div className="text-gray-600 capitalize">
+        <div className="text-gray-400 capitalize mt-2">
           {weather.weather[0].description}
+        </div>
+        <div className="text-gray-400 mt-2">
+          Feels like {Math.round(weather.main.feels_like)}°C
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-4 mt-8">
         <div className="text-center">
-          <div className="text-sm text-gray-500">Feels Like</div>
-          <div className="font-semibold">{Math.round(weather.main.feels_like)}°C</div>
+          <div className="text-sm text-gray-400">Humidity</div>
+          <div className="font-semibold text-gray-200">{weather.main.humidity}%</div>
         </div>
         <div className="text-center">
-          <div className="text-sm text-gray-500">Humidity</div>
-          <div className="font-semibold">{weather.main.humidity}%</div>
+          <div className="text-sm text-gray-400">Wind Speed</div>
+          <div className="font-semibold text-gray-200">{weather.wind.speed} m/s</div>
         </div>
         <div className="text-center">
-          <div className="text-sm text-gray-500">Wind Speed</div>
-          <div className="font-semibold">{weather.wind.speed} m/s</div>
+          <div className="text-sm text-gray-400">High</div>
+          <div className="font-semibold text-gray-200">{Math.round(weather.main.temp_max)}°C</div>
         </div>
         <div className="text-center">
-          <div className="text-sm text-gray-500">Condition</div>
-          <div className="font-semibold capitalize">{weather.weather[0].main}</div>
+          <div className="text-sm text-gray-400">Low</div>
+          <div className="font-semibold text-gray-200">{Math.round(weather.main.temp_min)}°C</div>
         </div>
       </div>
     </div>
