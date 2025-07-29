@@ -4,6 +4,8 @@ interface WeatherData {
     temp: number;
     humidity: number;
     feels_like: number;
+    temp_max?: number;
+    temp_min?: number;
   };
   weather: Array<{
     main: string;
@@ -47,11 +49,11 @@ export default function WeatherCard({ weather }: WeatherCardProps) {
         </div>
         <div className="text-center">
           <div className="text-sm text-gray-400">High</div>
-          <div className="font-semibold text-gray-200">{Math.round(weather.main.temp_max)}°C</div>
+          <div className="font-semibold text-gray-200">{weather.main.temp_max ? Math.round(weather.main.temp_max) : Math.round(weather.main.temp)}°C</div>
         </div>
         <div className="text-center">
           <div className="text-sm text-gray-400">Low</div>
-          <div className="font-semibold text-gray-200">{Math.round(weather.main.temp_min)}°C</div>
+          <div className="font-semibold text-gray-200">{weather.main.temp_min ? Math.round(weather.main.temp_min) : Math.round(weather.main.temp)}°C</div>
         </div>
       </div>
     </div>
